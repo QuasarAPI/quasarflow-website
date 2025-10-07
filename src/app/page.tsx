@@ -1,35 +1,48 @@
 import Link from 'next/link'
 import TerminalCode from '@/components/terminal-code'
+import DynamicRoadmap from '@/components/dynamic-roadmap'
+import { roadmapData, futureVisionData } from '@/constants/roadmap-data'
 
 export default function Home() {
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800'>
+    <div className='relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800'>
+      {/* Floating Elements - Background Effects */}
+      <div className='pointer-events-none absolute inset-0 overflow-hidden opacity-70'>
+        <div className='animate-float absolute top-[10%] left-[15%] h-[30rem] w-[30rem] rounded-full bg-blue-400 opacity-20 mix-blend-multiply blur-[6rem] filter dark:opacity-10'></div>
+        <div className='animate-float-delayed absolute top-[40%] right-[5%] h-[25rem] w-[25rem] rounded-full bg-purple-400 opacity-20 mix-blend-multiply blur-[6rem] filter dark:opacity-10'></div>
+        <div className='animate-float-slow absolute bottom-[10%] left-[35%] h-[20rem] w-[20rem] rounded-full bg-indigo-400 opacity-20 mix-blend-multiply blur-[5rem] filter dark:opacity-10'></div>
+      </div>
+
       {/* Navigation */}
-      <nav className='sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/80'>
+      <nav className='sticky top-0 z-50 border-b border-slate-200/50 bg-white/70 backdrop-blur-md transition-all duration-300 hover:bg-white/80 dark:border-slate-700/50 dark:bg-slate-900/60 dark:hover:bg-slate-900/70'>
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <div className='flex h-16 items-center justify-between'>
             <div className='flex items-center'>
-              <h1 className='text-2xl font-bold text-slate-900 dark:text-white'>
-                Quasar<span className='text-blue-600'>Flow</span>
+              <h1 className='group relative text-2xl font-bold text-slate-900 dark:text-white'>
+                Quasar
+                <span className='relative text-blue-600'>
+                  Flow
+                  <span className='absolute -bottom-1 left-0 h-0.5 w-0 bg-blue-500 transition-all duration-300 group-hover:w-full'></span>
+                </span>
               </h1>
             </div>
             <div className='hidden md:block'>
               <div className='ml-10 flex items-baseline space-x-4'>
                 <Link
                   href='/docs'
-                  className='rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+                  className='relative rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-all duration-300 after:absolute after:bottom-1 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-blue-500 after:transition-all after:duration-300 hover:text-slate-900 hover:after:w-1/2 dark:text-slate-300 dark:hover:text-white'
                 >
                   Documentation
                 </Link>
                 <Link
                   href='/api'
-                  className='rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+                  className='relative rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-all duration-300 after:absolute after:bottom-1 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-blue-500 after:transition-all after:duration-300 hover:text-slate-900 hover:after:w-1/2 dark:text-slate-300 dark:hover:text-white'
                 >
                   API Reference
                 </Link>
                 <Link
                   href='/examples'
-                  className='rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+                  className='relative rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-all duration-300 after:absolute after:bottom-1 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-blue-500 after:transition-all after:duration-300 hover:text-slate-900 hover:after:w-1/2 dark:text-slate-300 dark:hover:text-white'
                 >
                   Examples
                 </Link>
@@ -37,7 +50,7 @@ export default function Home() {
                   href='https://github.com/QuasarAPI/quasarflow-api'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700'
+                  className='rounded-md bg-blue-600/90 px-4 py-2 text-sm font-medium text-white shadow-md backdrop-blur-sm transition-all duration-300 hover:translate-y-[-1px] hover:bg-blue-700 hover:shadow-lg'
                 >
                   GitHub
                 </a>
@@ -49,33 +62,49 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
-        <div className='mx-auto max-w-7xl px-4 pt-20 pb-16 sm:px-6 lg:px-8'>
+        {/* Parallax Background Elements */}
+        <div className='absolute inset-0 opacity-60 dark:opacity-20'>
+          <div className='animate-blob absolute -top-20 -left-20 h-60 w-60 rounded-full bg-blue-200 mix-blend-multiply blur-3xl filter'></div>
+          <div className='animate-blob animation-delay-2000 absolute top-0 -right-20 h-60 w-60 rounded-full bg-purple-200 mix-blend-multiply blur-3xl filter'></div>
+          <div className='animate-blob animation-delay-4000 absolute -bottom-20 left-40 h-60 w-60 rounded-full bg-indigo-200 mix-blend-multiply blur-3xl filter'></div>
+        </div>
+
+        <div className='relative z-10 mx-auto max-w-7xl px-4 pt-28 pb-24 sm:px-6 lg:px-8'>
           <div className='text-center'>
-            <div className='mb-8 inline-flex items-center rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200'>
+            <div className='mb-10 inline-flex items-center rounded-full border border-blue-200/50 bg-blue-100/80 px-5 py-2.5 text-sm font-medium text-blue-800 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg dark:border-blue-700/50 dark:bg-blue-900/70 dark:text-blue-200'>
               <span className='mr-2 h-2 w-2 animate-pulse rounded-full bg-blue-600'></span>
               Self-hosted API Gateway for Stellar Network
             </div>
 
-            <h1 className='mb-6 text-4xl font-bold text-slate-900 md:text-6xl dark:text-white'>
+            <h1 className='mb-6 bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-4xl font-extrabold text-transparent md:text-6xl dark:from-white dark:via-blue-300 dark:to-white'>
               Build Blockchain Apps
               <br />
-              <span className='text-blue-600'>Without the Complexity</span>
+              <span className='relative'>
+                <span className='absolute inset-0 -z-10 bg-blue-500/10 blur-xl'></span>
+                Without the Complexity
+              </span>
             </h1>
 
-            <p className='mx-auto mb-8 max-w-3xl text-xl text-slate-600 dark:text-slate-300'>
+            <p
+              className='animate-fade-in mx-auto mb-10 max-w-3xl text-xl leading-relaxed text-slate-600 opacity-0 dark:text-slate-300'
+              style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}
+            >
               The official Go backend for QuasarFlow, a self-hosted API gateway
               for the Stellar network. Eliminates blockchain complexity through
               simple REST endpoints. No crypto knowledge required.
             </p>
 
-            <div className='flex flex-col items-center justify-center gap-4 sm:flex-row'>
+            <div
+              className='animate-fade-in flex flex-col items-center justify-center gap-5 opacity-0 sm:flex-row'
+              style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}
+            >
               <Link
                 href='/docs'
-                className='inline-flex items-center rounded-lg bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700'
+                className='inline-flex items-center rounded-lg bg-blue-600/90 px-8 py-3 font-medium text-white shadow-lg shadow-blue-500/20 backdrop-blur-sm transition-all duration-300 hover:translate-y-[-2px] hover:bg-blue-700 hover:shadow-blue-500/40'
               >
                 Get Started
                 <svg
-                  className='ml-2 h-4 w-4'
+                  className='ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -92,7 +121,7 @@ export default function Home() {
                 href='https://github.com/QuasarAPI/quasarflow-api'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-flex items-center rounded-lg border border-slate-300 px-8 py-3 font-medium text-slate-700 transition-colors hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800'
+                className='inline-flex items-center rounded-lg border border-slate-300/70 bg-white/50 px-8 py-3 font-medium text-slate-700 shadow-md backdrop-blur-sm transition-all duration-300 hover:translate-y-[-2px] hover:bg-white/80 hover:shadow-lg dark:border-slate-600/70 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:bg-slate-700/70'
               >
                 <svg
                   className='mr-2 h-4 w-4'
@@ -109,14 +138,19 @@ export default function Home() {
       </section>
 
       {/* Code Example */}
-      <section className='bg-white py-16 dark:bg-slate-800'>
-        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-          <div className='mb-12 text-center'>
-            <h2 className='mb-4 text-3xl font-bold text-slate-900 dark:text-white'>
+      <section className='relative bg-white/95 py-24 backdrop-blur-sm dark:bg-slate-800/95'>
+        <div className='bg-grid-pattern absolute inset-0 opacity-10 dark:opacity-5'></div>
+        <div className='relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='mb-16 text-center'>
+            <div className='mb-3 inline-block rounded-full bg-gradient-to-r from-blue-500/10 to-indigo-500/10 px-4 py-1 text-sm font-medium text-blue-600 dark:from-blue-500/20 dark:to-indigo-500/20 dark:text-blue-400'>
+              Developer Experience
+            </div>
+            <h2 className='mb-5 text-4xl font-extrabold text-slate-900 dark:text-white'>
               Simple REST API
             </h2>
-            <p className='text-lg text-slate-600 dark:text-slate-300'>
-              Build blockchain features with familiar HTTP requests
+            <p className='mx-auto max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300'>
+              Build blockchain features with familiar HTTP requests — no
+              specialized knowledge required
             </p>
           </div>
 
@@ -143,23 +177,29 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
       </section>
 
       {/* Features */}
-      <section className='bg-slate-50 py-20 dark:bg-slate-900'>
-        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+      <section className='relative bg-slate-50/80 py-28 backdrop-blur-sm dark:bg-slate-900/80'>
+        <div className='pointer-events-none absolute inset-0 overflow-hidden opacity-30'>
+          <div className='absolute top-1/4 left-0 h-40 w-full -rotate-1 transform bg-gradient-to-r from-blue-400/10 via-purple-500/10 to-indigo-500/10 dark:from-blue-400/20 dark:via-purple-500/20 dark:to-indigo-500/20'></div>
+        </div>
+        <div className='relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <div className='mb-16 text-center'>
-            <h2 className='mb-4 text-3xl font-bold text-slate-900 dark:text-white'>
+            <div className='mb-3 inline-block rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-1 text-sm font-medium text-indigo-600 dark:from-blue-500/20 dark:to-purple-500/20 dark:text-indigo-400'>
+              Why Choose Us
+            </div>
+            <h2 className='mb-5 text-4xl font-extrabold text-slate-900 dark:text-white'>
               Why Choose QuasarFlow?
             </h2>
-            <p className='mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-300'>
+            <p className='mx-auto max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300'>
               Enterprise-grade blockchain infrastructure that scales with your
-              business
+              business, designed for developers who want simplicity
             </p>
           </div>
 
           <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            <div className='rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800'>
-              <div className='mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900'>
+            <div className='group rounded-xl border border-slate-200/70 bg-white/70 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:translate-y-[-5px] hover:bg-white hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/60 dark:hover:bg-slate-800/90'>
+              <div className='mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg shadow-blue-500/20 dark:from-blue-600 dark:to-blue-900 dark:shadow-blue-900/30'>
                 <svg
-                  className='h-6 w-6 text-blue-600 dark:text-blue-400'
+                  className='h-8 w-8 text-white'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -172,19 +212,19 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                   />
                 </svg>
               </div>
-              <h3 className='mb-2 text-xl font-semibold text-slate-900 dark:text-white'>
+              <h3 className='mb-3 text-xl font-bold text-slate-900 dark:text-white'>
                 Lightning Fast
               </h3>
-              <p className='text-slate-600 dark:text-slate-300'>
+              <p className='leading-relaxed text-slate-600 dark:text-slate-300'>
                 Built on Stellar&apos;s fast, low-cost network. Transactions
                 settle in seconds, not minutes.
               </p>
             </div>
 
-            <div className='rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800'>
-              <div className='mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900'>
+            <div className='group rounded-xl border border-slate-200/70 bg-white/70 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:translate-y-[-5px] hover:bg-white hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/60 dark:hover:bg-slate-800/90'>
+              <div className='mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/20 dark:from-green-600 dark:to-green-900 dark:shadow-green-900/30'>
                 <svg
-                  className='h-6 w-6 text-green-600 dark:text-green-400'
+                  className='h-8 w-8 text-white'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -197,19 +237,19 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                   />
                 </svg>
               </div>
-              <h3 className='mb-2 text-xl font-semibold text-slate-900 dark:text-white'>
+              <h3 className='mb-3 text-xl font-bold text-slate-900 dark:text-white'>
                 Enterprise Security
               </h3>
-              <p className='text-slate-600 dark:text-slate-300'>
+              <p className='leading-relaxed text-slate-600 dark:text-slate-300'>
                 AES-256-GCM encryption, JWT authentication, and comprehensive
                 security headers.
               </p>
             </div>
 
-            <div className='rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800'>
-              <div className='mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900'>
+            <div className='group rounded-xl border border-slate-200/70 bg-white/70 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:translate-y-[-5px] hover:bg-white hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/60 dark:hover:bg-slate-800/90'>
+              <div className='mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-purple-400 to-purple-600 shadow-lg shadow-purple-500/20 dark:from-purple-600 dark:to-purple-900 dark:shadow-purple-900/30'>
                 <svg
-                  className='h-6 w-6 text-purple-600 dark:text-purple-400'
+                  className='h-8 w-8 text-white'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -222,19 +262,19 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                   />
                 </svg>
               </div>
-              <h3 className='mb-2 text-xl font-semibold text-slate-900 dark:text-white'>
+              <h3 className='mb-3 text-xl font-bold text-slate-900 dark:text-white'>
                 Developer Friendly
               </h3>
-              <p className='text-slate-600 dark:text-slate-300'>
+              <p className='leading-relaxed text-slate-600 dark:text-slate-300'>
                 Simple REST API with comprehensive documentation and code
                 examples.
               </p>
             </div>
 
-            <div className='rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800'>
-              <div className='mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-orange-100 dark:bg-orange-900'>
+            <div className='group rounded-xl border border-slate-200/70 bg-white/70 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:translate-y-[-5px] hover:bg-white hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/60 dark:hover:bg-slate-800/90'>
+              <div className='mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shadow-lg shadow-orange-500/20 dark:from-orange-600 dark:to-orange-900 dark:shadow-orange-900/30'>
                 <svg
-                  className='h-6 w-6 text-orange-600 dark:text-orange-400'
+                  className='h-8 w-8 text-white'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -247,19 +287,19 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                   />
                 </svg>
               </div>
-              <h3 className='mb-2 text-xl font-semibold text-slate-900 dark:text-white'>
+              <h3 className='mb-3 text-xl font-bold text-slate-900 dark:text-white'>
                 External Wallet Support
               </h3>
-              <p className='text-slate-600 dark:text-slate-300'>
+              <p className='leading-relaxed text-slate-600 dark:text-slate-300'>
                 Verify ownership of existing Stellar wallets using SEP-10
                 standards.
               </p>
             </div>
 
-            <div className='rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800'>
-              <div className='mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-100 dark:bg-red-900'>
+            <div className='group rounded-xl border border-slate-200/70 bg-white/70 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:translate-y-[-5px] hover:bg-white hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/60 dark:hover:bg-slate-800/90'>
+              <div className='mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-red-400 to-red-600 shadow-lg shadow-red-500/20 dark:from-red-600 dark:to-red-900 dark:shadow-red-900/30'>
                 <svg
-                  className='h-6 w-6 text-red-600 dark:text-red-400'
+                  className='h-8 w-8 text-white'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -272,19 +312,19 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                   />
                 </svg>
               </div>
-              <h3 className='mb-2 text-xl font-semibold text-slate-900 dark:text-white'>
+              <h3 className='mb-3 text-xl font-bold text-slate-900 dark:text-white'>
                 Production Ready
               </h3>
-              <p className='text-slate-600 dark:text-slate-300'>
+              <p className='leading-relaxed text-slate-600 dark:text-slate-300'>
                 Built with Clean Architecture, comprehensive testing, and Docker
                 support. MIT licensed.
               </p>
             </div>
 
-            <div className='rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800'>
-              <div className='mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-100 dark:bg-indigo-900'>
+            <div className='group rounded-xl border border-slate-200/70 bg-white/70 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:translate-y-[-5px] hover:bg-white hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/60 dark:hover:bg-slate-800/90'>
+              <div className='mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 shadow-lg shadow-indigo-500/20 dark:from-indigo-600 dark:to-indigo-900 dark:shadow-indigo-900/30'>
                 <svg
-                  className='h-6 w-6 text-indigo-600 dark:text-indigo-400'
+                  className='h-8 w-8 text-white'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -297,10 +337,10 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                   />
                 </svg>
               </div>
-              <h3 className='mb-2 text-xl font-semibold text-slate-900 dark:text-white'>
+              <h3 className='mb-3 text-xl font-bold text-slate-900 dark:text-white'>
                 Scalable Infrastructure
               </h3>
-              <p className='text-slate-600 dark:text-slate-300'>
+              <p className='leading-relaxed text-slate-600 dark:text-slate-300'>
                 Built to handle enterprise workloads with rate limiting and
                 monitoring.
               </p>
@@ -310,55 +350,64 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
       </section>
 
       {/* Project Status */}
-      <section className='bg-gradient-to-r from-blue-50 to-indigo-50 py-16 dark:from-slate-800 dark:to-slate-700'>
-        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-          <div className='mb-12 text-center'>
-            <h2 className='mb-4 text-3xl font-bold text-slate-900 dark:text-white'>
+      <section className='relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 py-24 dark:from-slate-800 dark:to-slate-700'>
+        <div className='absolute inset-0 overflow-hidden opacity-40 mix-blend-soft-light'>
+          <div className='absolute h-full w-full bg-[url("/grid.svg")] bg-repeat opacity-40'></div>
+        </div>
+        <div className='absolute right-0 bottom-0 h-96 w-96 -translate-x-20 translate-y-20 rounded-full bg-blue-300/20 backdrop-blur-3xl dark:bg-blue-600/10'></div>
+        <div className='absolute top-0 left-0 h-96 w-96 translate-x-10 -translate-y-40 rounded-full bg-indigo-300/20 backdrop-blur-3xl dark:bg-indigo-600/10'></div>
+
+        <div className='relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='mb-16 text-center'>
+            <div className='mb-3 inline-block rounded-full bg-gradient-to-r from-blue-500/10 to-indigo-500/10 px-4 py-1 text-sm font-medium text-blue-600 dark:from-blue-500/20 dark:to-indigo-500/20 dark:text-blue-400'>
+              Current Status
+            </div>
+            <h2 className='mb-5 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-4xl font-extrabold text-transparent dark:from-blue-400 dark:to-indigo-400'>
               Project Status
             </h2>
-            <p className='text-lg text-slate-600 dark:text-slate-300'>
+            <p className='mx-auto max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300'>
               Active development with enterprise-grade features
             </p>
           </div>
 
-          <div className='grid gap-6 md:grid-cols-4'>
-            <div className='text-center'>
-              <div className='mb-2 text-3xl font-bold text-blue-600 dark:text-blue-400'>
+          <div className='grid gap-8 md:grid-cols-4'>
+            <div className='group rounded-xl border border-blue-100/60 bg-white/60 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-2xl dark:border-blue-900/30 dark:bg-slate-800/40 dark:hover:bg-slate-800/60'>
+              <div className='mb-3 text-4xl font-extrabold text-blue-600 transition-transform duration-300 group-hover:scale-110 dark:text-blue-400'>
                 0
               </div>
-              <div className='text-sm text-slate-600 dark:text-slate-300'>
+              <div className='text-sm font-medium text-slate-600 dark:text-slate-300'>
                 GitHub Stars
               </div>
             </div>
-            <div className='text-center'>
-              <div className='mb-2 text-3xl font-bold text-green-600 dark:text-green-400'>
+            <div className='group rounded-xl border border-green-100/60 bg-white/60 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-2xl dark:border-green-900/30 dark:bg-slate-800/40 dark:hover:bg-slate-800/60'>
+              <div className='mb-3 text-4xl font-extrabold text-green-600 transition-transform duration-300 group-hover:scale-110 dark:text-green-400'>
                 2
               </div>
-              <div className='text-sm text-slate-600 dark:text-slate-300'>
+              <div className='text-sm font-medium text-slate-600 dark:text-slate-300'>
                 Forks
               </div>
             </div>
-            <div className='text-center'>
-              <div className='mb-2 text-3xl font-bold text-purple-600 dark:text-purple-400'>
+            <div className='group rounded-xl border border-purple-100/60 bg-white/60 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-2xl dark:border-purple-900/30 dark:bg-slate-800/40 dark:hover:bg-slate-800/60'>
+              <div className='mb-3 text-4xl font-extrabold text-purple-600 transition-transform duration-300 group-hover:scale-110 dark:text-purple-400'>
                 10
               </div>
-              <div className='text-sm text-slate-600 dark:text-slate-300'>
+              <div className='text-sm font-medium text-slate-600 dark:text-slate-300'>
                 Commits
               </div>
             </div>
-            <div className='text-center'>
-              <div className='mb-2 text-3xl font-bold text-orange-600 dark:text-orange-400'>
+            <div className='group rounded-xl border border-orange-100/60 bg-white/60 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-2xl dark:border-orange-900/30 dark:bg-slate-800/40 dark:hover:bg-slate-800/60'>
+              <div className='mb-3 text-4xl font-extrabold text-orange-600 transition-transform duration-300 group-hover:scale-110 dark:text-orange-400'>
                 MIT
               </div>
-              <div className='text-sm text-slate-600 dark:text-slate-300'>
+              <div className='text-sm font-medium text-slate-600 dark:text-slate-300'>
                 License
               </div>
             </div>
           </div>
 
-          <div className='mt-8 text-center'>
-            <div className='inline-flex items-center rounded-full bg-green-100 px-4 py-2 text-sm font-medium text-green-800 dark:bg-green-900 dark:text-green-200'>
-              <span className='mr-2 h-2 w-2 rounded-full bg-green-600'></span>
+          <div className='mt-12 text-center'>
+            <div className='inline-flex items-center rounded-full border border-green-200/60 bg-gradient-to-r from-green-500/10 to-green-600/20 px-5 py-2.5 text-sm font-medium text-green-800 shadow-lg shadow-green-500/10 backdrop-blur-sm transition-all duration-300 hover:shadow-green-500/20 dark:border-green-700/50 dark:from-green-900/40 dark:to-green-800/40 dark:text-green-300'>
+              <span className='mr-2 h-3 w-3 animate-pulse rounded-full bg-green-500'></span>
               Active Development
             </div>
           </div>
@@ -366,23 +415,27 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
       </section>
 
       {/* Use Cases */}
-      <section className='bg-white py-20 dark:bg-slate-800'>
-        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+      <section className='relative bg-white/90 py-28 backdrop-blur-md dark:bg-slate-800/90'>
+        <div className='absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.1),transparent),radial-gradient(circle_at_70%_70%,rgba(147,51,234,0.1),transparent)] opacity-70'></div>
+        <div className='relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <div className='mb-16 text-center'>
-            <h2 className='mb-4 text-3xl font-bold text-slate-900 dark:text-white'>
+            <div className='mb-3 inline-block rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-1 text-sm font-medium text-blue-600 dark:from-blue-500/20 dark:to-purple-500/20 dark:text-blue-400'>
+              Industry Solutions
+            </div>
+            <h2 className='mb-5 text-4xl font-extrabold text-slate-900 dark:text-white'>
               Perfect For
             </h2>
-            <p className='text-lg text-slate-600 dark:text-slate-300'>
+            <p className='mx-auto max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300'>
               From fintech to gaming, QuasarFlow powers blockchain features
               across industries
             </p>
           </div>
 
-          <div className='grid gap-8 md:grid-cols-3'>
-            <div className='text-center'>
-              <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900'>
+          <div className='grid gap-10 md:grid-cols-3'>
+            <div className='group rounded-2xl border border-blue-100/60 bg-white/80 p-8 text-center shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/80 hover:shadow-2xl dark:border-blue-900/20 dark:bg-slate-800/60 dark:hover:bg-gradient-to-b dark:hover:from-slate-800/80 dark:hover:to-slate-700/60'>
+              <div className='mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg shadow-blue-500/30 transition-transform duration-300 group-hover:scale-110 dark:from-blue-500 dark:to-blue-700 dark:shadow-blue-900/20'>
                 <svg
-                  className='h-8 w-8 text-blue-600 dark:text-blue-400'
+                  className='h-10 w-10 text-white'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -395,19 +448,19 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                   />
                 </svg>
               </div>
-              <h3 className='mb-2 text-xl font-semibold text-slate-900 dark:text-white'>
+              <h3 className='mb-3 text-2xl font-bold text-slate-900 dark:text-white'>
                 Fintech Applications
               </h3>
-              <p className='text-slate-600 dark:text-slate-300'>
+              <p className='leading-relaxed text-slate-600 dark:text-slate-300'>
                 Add crypto wallet functionality to banking apps and enable
                 cryptocurrency payments in e-commerce platforms.
               </p>
             </div>
 
-            <div className='text-center'>
-              <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900'>
+            <div className='group rounded-2xl border border-green-100/60 bg-white/80 p-8 text-center shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-gradient-to-b hover:from-white hover:to-green-50/80 hover:shadow-2xl dark:border-green-900/20 dark:bg-slate-800/60 dark:hover:bg-gradient-to-b dark:hover:from-slate-800/80 dark:hover:to-slate-700/60'>
+              <div className='mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/30 transition-transform duration-300 group-hover:scale-110 dark:from-green-500 dark:to-green-700 dark:shadow-green-900/20'>
                 <svg
-                  className='h-8 w-8 text-green-600 dark:text-green-400'
+                  className='h-10 w-10 text-white'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -420,19 +473,19 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                   />
                 </svg>
               </div>
-              <h3 className='mb-2 text-xl font-semibold text-slate-900 dark:text-white'>
+              <h3 className='mb-3 text-2xl font-bold text-slate-900 dark:text-white'>
                 Gaming & Digital Assets
               </h3>
-              <p className='text-slate-600 dark:text-slate-300'>
+              <p className='leading-relaxed text-slate-600 dark:text-slate-300'>
                 Manage in-game assets on blockchain and create NFT marketplaces
                 for digital collectibles.
               </p>
             </div>
 
-            <div className='text-center'>
-              <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900'>
+            <div className='group rounded-2xl border border-purple-100/60 bg-white/80 p-8 text-center shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-gradient-to-b hover:from-white hover:to-purple-50/80 hover:shadow-2xl dark:border-purple-900/20 dark:bg-slate-800/60 dark:hover:bg-gradient-to-b dark:hover:from-slate-800/80 dark:hover:to-slate-700/60'>
+              <div className='mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-purple-400 to-purple-600 shadow-lg shadow-purple-500/30 transition-transform duration-300 group-hover:scale-110 dark:from-purple-500 dark:to-purple-700 dark:shadow-purple-900/20'>
                 <svg
-                  className='h-8 w-8 text-purple-600 dark:text-purple-400'
+                  className='h-10 w-10 text-white'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -445,10 +498,10 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                   />
                 </svg>
               </div>
-              <h3 className='mb-2 text-xl font-semibold text-slate-900 dark:text-white'>
+              <h3 className='mb-3 text-2xl font-bold text-slate-900 dark:text-white'>
                 Enterprise Solutions
               </h3>
-              <p className='text-slate-600 dark:text-slate-300'>
+              <p className='leading-relaxed text-slate-600 dark:text-slate-300'>
                 Add blockchain capabilities to business systems and enable
                 cross-border payments.
               </p>
@@ -458,23 +511,34 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
       </section>
 
       {/* CTA Section */}
-      <section className='bg-blue-600 py-20'>
-        <div className='mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8'>
-          <h2 className='mb-4 text-3xl font-bold text-white'>
+      <section className='relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 py-24'>
+        <div className='absolute inset-0 opacity-30'>
+          <div className='animate-slow-pulse absolute -top-32 -left-32 h-96 w-96 rounded-full bg-blue-400 mix-blend-overlay blur-3xl'></div>
+          <div className='animate-slow-pulse animation-delay-2000 absolute top-20 right-0 h-80 w-80 rounded-full bg-indigo-500 mix-blend-overlay blur-3xl'></div>
+          <div className='animate-slow-pulse animation-delay-4000 absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-blue-300 mix-blend-overlay blur-3xl'></div>
+          <div className='pointer-events-none absolute inset-0 bg-[url("/grid.svg")] bg-center opacity-20'></div>
+        </div>
+
+        <div className='relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8'>
+          <div className='mb-3 inline-flex items-center rounded-full border border-blue-300/30 bg-blue-400/20 px-5 py-2 text-sm font-medium text-white backdrop-blur-sm'>
+            <span className='mr-2 h-2 w-2 animate-pulse rounded-full bg-blue-200'></span>
+            Get Started Today
+          </div>
+          <h2 className='mb-6 text-4xl font-extrabold text-white md:text-5xl'>
             Ready to Build the Future?
           </h2>
-          <p className='mx-auto mb-8 max-w-2xl text-xl text-blue-100'>
+          <p className='mx-auto mb-12 max-w-2xl text-xl leading-relaxed text-blue-100/90'>
             Start building blockchain-powered applications today. No crypto
             knowledge required.
           </p>
-          <div className='flex flex-col justify-center gap-4 sm:flex-row'>
+          <div className='flex flex-col justify-center gap-5 sm:flex-row'>
             <Link
               href='/docs'
-              className='inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 font-medium text-blue-600 transition-colors hover:bg-blue-50'
+              className='group inline-flex items-center justify-center rounded-lg bg-white/90 px-8 py-3.5 font-medium text-blue-600 shadow-lg shadow-blue-700/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-blue-700/40'
             >
               Get Started
               <svg
-                className='ml-2 h-4 w-4'
+                className='ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1'
                 fill='none'
                 stroke='currentColor'
                 viewBox='0 0 24 24'
@@ -491,7 +555,7 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
               href='https://github.com/QuasarAPI/quasarflow-api'
               target='_blank'
               rel='noopener noreferrer'
-              className='inline-flex items-center justify-center rounded-lg border border-blue-300 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700'
+              className='inline-flex items-center justify-center rounded-lg border border-white/30 bg-transparent px-8 py-3.5 font-medium text-white shadow-lg shadow-blue-900/20 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/10 hover:shadow-xl hover:shadow-blue-900/30'
             >
               View on GitHub
             </a>
@@ -500,303 +564,142 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
       </section>
 
       {/* Roadmap */}
-      <section className='bg-white py-20 dark:bg-slate-800'>
-        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+      <section className='relative overflow-hidden bg-white py-24 dark:bg-slate-800'>
+        {/* Background Elements */}
+        <div className='absolute inset-0 bg-[url("/grid.svg")] bg-center opacity-10 dark:opacity-5'></div>
+        <div className='absolute top-0 right-0 -mt-24 -mr-24 h-96 w-96 rounded-full bg-blue-200/20 mix-blend-multiply blur-3xl filter dark:bg-blue-800/20'></div>
+        <div className='absolute bottom-0 left-0 -mb-24 -ml-24 h-96 w-96 rounded-full bg-indigo-200/20 mix-blend-multiply blur-3xl filter dark:bg-indigo-800/20'></div>
+
+        <div className='relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          {/* Section Header */}
           <div className='mb-16 text-center'>
-            <h2 className='mb-4 text-4xl font-bold text-slate-900 dark:text-white'>
+            <div className='mb-4 inline-block rounded-full bg-gradient-to-r from-blue-500/10 to-indigo-500/10 px-4 py-1 text-sm font-medium text-blue-600 dark:from-blue-500/20 dark:to-indigo-500/20 dark:text-blue-400'>
+              Development Timeline
+            </div>
+            <h2 className='mb-6 bg-gradient-to-r from-blue-800 to-indigo-600 bg-clip-text text-5xl font-extrabold text-transparent dark:from-blue-400 dark:to-indigo-400'>
               Roadmap 2025-2026
             </h2>
-            <p className='mx-auto max-w-3xl text-xl text-slate-600 dark:text-slate-300'>
+            <p className='mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300'>
               Our development roadmap for 2025, focusing on Go API enhancements,
               Stellar network integration, and enterprise-grade features.
             </p>
           </div>
 
-          <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-4'>
-            {/* Q1 2025 */}
-            <div className='relative'>
-              <div className='h-full rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-100 p-6 dark:from-slate-700 dark:to-slate-600'>
-                <div className='mb-4 flex items-center'>
-                  <div className='mr-3 h-3 w-3 rounded-full bg-blue-500'></div>
-                  <h3 className='text-xl font-bold text-slate-900 dark:text-white'>
-                    Q1 2025
-                  </h3>
-                </div>
-                <div className='space-y-3'>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-green-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Core API v1.0 Release
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-green-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Docker Support
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-green-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Basic Wallet Operations
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-green-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      JWT Authentication
-                    </span>
-                  </div>
-                </div>
-                <div className='mt-4 border-t border-blue-200 pt-4 dark:border-slate-500'>
-                  <span className='text-xs font-medium text-blue-600 dark:text-blue-400'>
-                    COMPLETED
-                  </span>
-                </div>
-              </div>
-            </div>
+          {/* Dynamic Roadmap Component */}
+          <DynamicRoadmap items={roadmapData} />
 
-            {/* Q2 2025 */}
-            <div className='relative'>
-              <div className='h-full rounded-2xl bg-gradient-to-br from-green-50 to-emerald-100 p-6 dark:from-slate-700 dark:to-slate-600'>
-                <div className='mb-4 flex items-center'>
-                  <div className='mr-3 h-3 w-3 rounded-full bg-green-500'></div>
-                  <h3 className='text-xl font-bold text-slate-900 dark:text-white'>
-                    Q2 2025
-                  </h3>
-                </div>
-                <div className='space-y-3'>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-green-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Payment Processing
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-green-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Transaction History
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-green-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      External Wallet Verification
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-green-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Webhook Support
-                    </span>
-                  </div>
-                </div>
-                <div className='mt-4 border-t border-green-200 pt-4 dark:border-slate-500'>
-                  <span className='text-xs font-medium text-green-600 dark:text-green-400'>
-                    COMPLETED
-                  </span>
-                </div>
-              </div>
-            </div>
+          {/* Future Vision Section */}
+          <div className='relative mt-28 text-center'>
+            <div className='absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent dark:via-blue-500/20'></div>
+            <div className='absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent dark:via-indigo-500/20'></div>
 
-            {/* Q3 2025 */}
-            <div className='relative'>
-              <div className='h-full rounded-2xl bg-gradient-to-br from-yellow-50 to-orange-100 p-6 dark:from-slate-700 dark:to-slate-600'>
-                <div className='mb-4 flex items-center'>
-                  <div className='mr-3 h-3 w-3 rounded-full bg-yellow-500'></div>
-                  <h3 className='text-xl font-bold text-slate-900 dark:text-white'>
-                    Q3 2025
-                  </h3>
-                </div>
-                <div className='space-y-3'>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-yellow-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Advanced Stellar Operations
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-yellow-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Rate Limiting & Throttling
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-yellow-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      API Analytics & Monitoring
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-yellow-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Performance Optimization
-                    </span>
-                  </div>
-                </div>
-                <div className='mt-4 border-t border-yellow-200 pt-4 dark:border-slate-500'>
-                  <span className='text-xs font-medium text-yellow-600 dark:text-yellow-400'>
-                    IN PROGRESS
-                  </span>
-                </div>
-              </div>
-            </div>
+            <h3 className='mb-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400'>
+              Looking Ahead to 2026
+            </h3>
+            <p className='mx-auto mb-10 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300'>
+              Our vision extends beyond 2025 with plans for advanced Stellar
+              network features, enhanced Go API capabilities, and
+              enterprise-grade blockchain solutions.
+            </p>
 
-            {/* Q4 2025 */}
-            <div className='relative'>
-              <div className='h-full rounded-2xl bg-gradient-to-br from-purple-50 to-pink-100 p-6 dark:from-slate-700 dark:to-slate-600'>
-                <div className='mb-4 flex items-center'>
-                  <div className='mr-3 h-3 w-3 rounded-full bg-purple-500'></div>
-                  <h3 className='text-xl font-bold text-slate-900 dark:text-white'>
-                    Q4 2025
-                  </h3>
-                </div>
-                <div className='space-y-3'>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-purple-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Enhanced Stellar SDK Integration
-                    </span>
+            {/* Future Vision Cards - Mapped from data */}
+            <div className='mx-auto grid max-w-4xl gap-8 md:grid-cols-3'>
+              {futureVisionData.map((item, index) => (
+                <div
+                  key={index}
+                  className='group/card relative rounded-xl border border-blue-100/60 bg-white/60 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/60 hover:shadow-xl dark:border-blue-900/20 dark:bg-slate-800/60 dark:hover:bg-gradient-to-b dark:hover:from-slate-800/80 dark:hover:to-slate-700/60'
+                >
+                  <div className='absolute -inset-px rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 opacity-0 blur-sm transition-opacity duration-300 group-hover/card:opacity-10'></div>
+                  <div className='relative mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 shadow-lg'>
+                    {/* Conditional Icon Rendering */}
+                    {item.icon === 'lightning' && (
+                      <svg
+                        className='h-8 w-8 text-white'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M13 10V3L4 14h7v7l9-11h-7z'
+                        />
+                      </svg>
+                    )}
+                    {item.icon === 'chart' && (
+                      <svg
+                        className='h-8 w-8 text-white'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                        />
+                      </svg>
+                    )}
+                    {item.icon === 'shield' && (
+                      <svg
+                        className='h-8 w-8 text-white'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
+                        />
+                      </svg>
+                    )}
                   </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-purple-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Multi-Asset & Token Support
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-purple-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Advanced Security & Encryption
-                    </span>
-                  </div>
-                  <div className='flex items-start'>
-                    <div className='mt-2 mr-3 h-2 w-2 flex-shrink-0 rounded-full bg-purple-500'></div>
-                    <span className='text-sm text-slate-700 dark:text-slate-300'>
-                      Enterprise API Management
-                    </span>
-                  </div>
-                </div>
-                <div className='mt-4 border-t border-purple-200 pt-4 dark:border-slate-500'>
-                  <span className='text-xs font-medium text-purple-600 dark:text-purple-400'>
-                    PLANNED
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Future Vision */}
-          <div className='mt-16 text-center'>
-            <div className='rounded-2xl bg-gradient-to-r from-slate-50 to-blue-50 p-8 dark:from-slate-800 dark:to-slate-700'>
-              <h3 className='mb-4 text-2xl font-bold text-slate-900 dark:text-white'>
-                Looking Ahead to 2026
-              </h3>
-              <p className='mx-auto mb-6 max-w-3xl text-lg text-slate-600 dark:text-slate-300'>
-                Our vision extends beyond 2025 with plans for advanced Stellar
-                network features, enhanced Go API capabilities, and
-                enterprise-grade blockchain solutions.
-              </p>
-              <div className='mx-auto grid max-w-4xl gap-6 md:grid-cols-3'>
-                <div className='text-center'>
-                  <div className='mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900'>
-                    <svg
-                      className='h-6 w-6 text-blue-600 dark:text-blue-400'
-                      fill='none'
-                      stroke='currentColor'
-                      viewBox='0 0 24 24'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        strokeWidth={2}
-                        d='M13 10V3L4 14h7v7l9-11h-7z'
-                      />
-                    </svg>
-                  </div>
-                  <h4 className='mb-2 font-semibold text-slate-900 dark:text-white'>
-                    Advanced Stellar Features
+                  <h4 className='mb-3 text-center text-xl font-bold text-slate-900 dark:text-white'>
+                    {item.title}
                   </h4>
-                  <p className='text-sm text-slate-600 dark:text-slate-300'>
-                    Smart contracts, complex transactions, and advanced Stellar
-                    network capabilities
+                  <p className='text-center text-slate-600 dark:text-slate-300'>
+                    {item.description}
                   </p>
                 </div>
-                <div className='text-center'>
-                  <div className='mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900'>
-                    <svg
-                      className='h-6 w-6 text-green-600 dark:text-green-400'
-                      fill='none'
-                      stroke='currentColor'
-                      viewBox='0 0 24 24'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        strokeWidth={2}
-                        d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
-                      />
-                    </svg>
-                  </div>
-                  <h4 className='mb-2 font-semibold text-slate-900 dark:text-white'>
-                    Stellar DeFi Integration
-                  </h4>
-                  <p className='text-sm text-slate-600 dark:text-slate-300'>
-                    Stellar DEX integration, liquidity pools, and automated
-                    market makers
-                  </p>
-                </div>
-                <div className='text-center'>
-                  <div className='mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900'>
-                    <svg
-                      className='h-6 w-6 text-purple-600 dark:text-purple-400'
-                      fill='none'
-                      stroke='currentColor'
-                      viewBox='0 0 24 24'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        strokeWidth={2}
-                        d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
-                      />
-                    </svg>
-                  </div>
-                  <h4 className='mb-2 font-semibold text-slate-900 dark:text-white'>
-                    Go API Excellence
-                  </h4>
-                  <p className='text-sm text-slate-600 dark:text-slate-300'>
-                    High-performance Go API, advanced monitoring, and
-                    enterprise-grade reliability
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className='bg-slate-900 py-12 text-white'>
-        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-          <div className='grid gap-8 md:grid-cols-4'>
+      <footer className='relative overflow-hidden bg-slate-900 py-16 text-white'>
+        <div className='absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(30,64,175,0.15),transparent),radial-gradient(circle_at_70%_60%,rgba(79,70,229,0.1),transparent)]'></div>
+        <div className='absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent'></div>
+
+        <div className='relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='grid gap-10 md:grid-cols-4'>
             <div>
-              <h3 className='mb-4 text-2xl font-bold'>
-                Quasar<span className='text-blue-400'>Flow</span>
+              <h3 className='mb-5 text-2xl font-bold'>
+                Quasar
+                <span className='bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent'>
+                  Flow
+                </span>
               </h3>
-              <p className='text-slate-400'>
+              <p className='leading-relaxed text-slate-400'>
                 Making blockchain development simple and accessible for
                 everyone.
               </p>
             </div>
 
             <div>
-              <h4 className='mb-4 font-semibold'>Documentation</h4>
-              <ul className='space-y-2 text-slate-400'>
+              <h4 className='mb-5 text-lg font-bold text-white/90'>
+                Documentation
+              </h4>
+              <ul className='space-y-3 text-slate-400'>
                 <li>
                   <Link
                     href='/docs'
-                    className='transition-colors hover:text-white'
+                    className='inline-flex transition-all duration-300 hover:translate-x-0.5 hover:text-white'
                   >
                     Getting Started
                   </Link>
@@ -804,7 +707,7 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                 <li>
                   <Link
                     href='/api'
-                    className='transition-colors hover:text-white'
+                    className='inline-flex transition-all duration-300 hover:translate-x-0.5 hover:text-white'
                   >
                     API Reference
                   </Link>
@@ -812,7 +715,7 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                 <li>
                   <Link
                     href='/examples'
-                    className='transition-colors hover:text-white'
+                    className='inline-flex transition-all duration-300 hover:translate-x-0.5 hover:text-white'
                   >
                     Examples
                   </Link>
@@ -821,12 +724,14 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
             </div>
 
             <div>
-              <h4 className='mb-4 font-semibold'>Resources</h4>
-              <ul className='space-y-2 text-slate-400'>
+              <h4 className='mb-5 text-lg font-bold text-white/90'>
+                Resources
+              </h4>
+              <ul className='space-y-3 text-slate-400'>
                 <li>
                   <a
                     href='https://github.com/QuasarAPI/quasarflow-api'
-                    className='transition-colors hover:text-white'
+                    className='inline-flex transition-all duration-300 hover:translate-x-0.5 hover:text-white'
                   >
                     GitHub
                   </a>
@@ -834,13 +739,16 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                 <li>
                   <a
                     href='https://stellar.org'
-                    className='transition-colors hover:text-white'
+                    className='inline-flex transition-all duration-300 hover:translate-x-0.5 hover:text-white'
                   >
                     Stellar Network
                   </a>
                 </li>
                 <li>
-                  <a href='#' className='transition-colors hover:text-white'>
+                  <a
+                    href='#'
+                    className='inline-flex transition-all duration-300 hover:translate-x-0.5 hover:text-white'
+                  >
                     Support
                   </a>
                 </li>
@@ -848,22 +756,32 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
             </div>
 
             <div>
-              <h4 className='mb-4 font-semibold'>Legal</h4>
-              <ul className='space-y-2 text-slate-400'>
+              <h4 className='mb-5 text-lg font-bold text-white/90'>Legal</h4>
+              <ul className='space-y-3 text-slate-400'>
                 <li>
                   <Link
                     href='/privacy'
-                    className='transition-colors hover:text-white'
+                    className='inline-flex transition-all duration-300 hover:translate-x-0.5 hover:text-white'
                   >
                     Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/terms'
+                    className='inline-flex transition-all duration-300 hover:translate-x-0.5 hover:text-white'
+                  >
+                    Terms of Service
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className='mt-8 border-t border-slate-800 pt-8 text-center text-slate-400'>
-            <p>&copy; 2024 QuasarFlow. All rights reserved.</p>
+          <div className='mt-12 border-t border-slate-800/80 pt-8 text-center text-slate-500'>
+            <p className='text-sm'>
+              &copy; 2024 QuasarFlow. All rights reserved.
+            </p>
           </div>
         </div>
       </footer>
