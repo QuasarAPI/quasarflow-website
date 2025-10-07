@@ -851,19 +851,12 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
               <h4 className='mb-4 font-semibold'>Legal</h4>
               <ul className='space-y-2 text-slate-400'>
                 <li>
-                  <a href='#' className='transition-colors hover:text-white'>
+                  <Link
+                    href='/privacy'
+                    className='transition-colors hover:text-white'
+                  >
                     Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href='#' className='transition-colors hover:text-white'>
-                    Terms of Service
-                  </a>
-                </li>
-                <li>
-                  <a href='#' className='transition-colors hover:text-white'>
-                    License
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
