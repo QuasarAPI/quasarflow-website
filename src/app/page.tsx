@@ -1,9 +1,13 @@
+'use client'
+
 import Link from 'next/link'
+import { useState } from 'react'
 import TerminalCode from '@/components/terminal-code'
 import DynamicRoadmap from '@/components/dynamic-roadmap'
 import { roadmapData, futureVisionData } from '@/constants/roadmap-data'
 
 export default function Home() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   return (
     <div className='relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800'>
       {/* Floating Elements - Background Effects */}
@@ -18,14 +22,25 @@ export default function Home() {
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <div className='flex h-16 items-center justify-between'>
             <div className='flex items-center'>
-              <h1 className='group relative text-2xl font-bold text-slate-900 dark:text-white'>
-                Quasar
-                <span className='relative text-blue-600'>
-                  Flow
-                  <span className='absolute -bottom-1 left-0 h-0.5 w-0 bg-blue-500 transition-all duration-300 group-hover:w-full'></span>
+              <Link href='/' className='flex items-center'>
+                <img
+                  src='/img/logo_without_blue.png'
+                  alt='QuasarFlow'
+                  className='mr-3 h-8 w-auto transition-transform duration-300 hover:scale-105 dark:hidden'
+                />
+                <img
+                  src='/img/logo_without_blue.png'
+                  alt='QuasarFlow'
+                  className='mr-3 hidden h-8 w-auto transition-transform duration-300 hover:scale-105 dark:block'
+                />
+                <span className='text-xl font-bold text-slate-900 sm:text-2xl dark:text-white'>
+                  Quasar
+                  <span className='text-blue-600'>Flow</span>
                 </span>
-              </h1>
+              </Link>
             </div>
+
+            {/* Desktop Navigation */}
             <div className='hidden md:block'>
               <div className='ml-10 flex items-baseline space-x-4'>
                 <Link
@@ -56,7 +71,89 @@ export default function Home() {
                 </a>
               </div>
             </div>
+
+            {/* Mobile menu button */}
+            <div className='md:hidden'>
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className='inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-inset dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white'
+                aria-expanded='false'
+              >
+                <span className='sr-only'>Open main menu</span>
+                {!isMobileMenuOpen ? (
+                  <svg
+                    className='block h-6 w-6'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                    aria-hidden='true'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M4 6h16M4 12h16M4 18h16'
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className='block h-6 w-6'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                    aria-hidden='true'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M6 18L18 6M6 6l12 12'
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMobileMenuOpen && (
+            <div className='md:hidden'>
+              <div className='space-y-1 px-2 pt-2 pb-3 sm:px-3'>
+                <Link
+                  href='/docs'
+                  className='block rounded-md px-3 py-2 text-base font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Documentation
+                </Link>
+                <Link
+                  href='/api'
+                  className='block rounded-md px-3 py-2 text-base font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  API Reference
+                </Link>
+                <Link
+                  href='/examples'
+                  className='block rounded-md px-3 py-2 text-base font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Examples
+                </Link>
+                <a
+                  href='https://github.com/QuasarAPI/quasarflow-api'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='block rounded-md bg-blue-600 px-3 py-2 text-base font-medium text-white hover:bg-blue-700'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -69,14 +166,17 @@ export default function Home() {
           <div className='animate-blob animation-delay-4000 absolute -bottom-20 left-40 h-60 w-60 rounded-full bg-indigo-200 mix-blend-multiply blur-3xl filter'></div>
         </div>
 
-        <div className='relative z-10 mx-auto max-w-7xl px-4 pt-28 pb-24 sm:px-6 lg:px-8'>
+        <div className='relative z-10 mx-auto max-w-7xl px-4 pt-20 pb-16 sm:px-6 sm:pt-28 sm:pb-24 lg:px-8'>
           <div className='text-center'>
-            <div className='mb-10 inline-flex items-center rounded-full border border-blue-200/50 bg-blue-100/80 px-5 py-2.5 text-sm font-medium text-blue-800 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg dark:border-blue-700/50 dark:bg-blue-900/70 dark:text-blue-200'>
+            <div className='mb-6 inline-flex items-center rounded-full border border-blue-200/50 bg-blue-100/80 px-3 py-2 text-xs font-medium text-blue-800 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg sm:mb-10 sm:px-5 sm:py-2.5 sm:text-sm dark:border-blue-700/50 dark:bg-blue-900/70 dark:text-blue-200'>
               <span className='mr-2 h-2 w-2 animate-pulse rounded-full bg-blue-600'></span>
-              Self-hosted API Gateway for Stellar Network
+              <span className='hidden sm:inline'>
+                Self-hosted API Gateway for Stellar Network
+              </span>
+              <span className='sm:hidden'>Stellar Network API Gateway</span>
             </div>
 
-            <h1 className='mb-6 bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-4xl font-extrabold text-transparent md:text-6xl dark:from-white dark:via-blue-300 dark:to-white'>
+            <h1 className='mb-4 bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-3xl font-extrabold text-transparent sm:mb-6 sm:text-4xl md:text-6xl dark:from-white dark:via-blue-300 dark:to-white'>
               Build Blockchain Apps
               <br />
               <span className='relative'>
@@ -86,21 +186,28 @@ export default function Home() {
             </h1>
 
             <p
-              className='animate-fade-in mx-auto mb-10 max-w-3xl text-xl leading-relaxed text-slate-600 opacity-0 dark:text-slate-300'
+              className='animate-fade-in mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-slate-600 opacity-0 sm:mb-10 sm:text-xl dark:text-slate-300'
               style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}
             >
-              The official Go backend for QuasarFlow, a self-hosted API gateway
-              for the Stellar network. Eliminates blockchain complexity through
-              simple REST endpoints. No crypto knowledge required.
+              <span className='hidden sm:inline'>
+                The official Go backend for QuasarFlow, a self-hosted API
+                gateway for the Stellar network. Eliminates blockchain
+                complexity through simple REST endpoints. No crypto knowledge
+                required.
+              </span>
+              <span className='sm:hidden'>
+                Self-hosted API gateway for Stellar network. Simple REST
+                endpoints. No crypto knowledge required.
+              </span>
             </p>
 
             <div
-              className='animate-fade-in flex flex-col items-center justify-center gap-5 opacity-0 sm:flex-row'
+              className='animate-fade-in flex w-full flex-col items-center justify-center gap-3 opacity-0 sm:w-auto sm:flex-row sm:gap-5'
               style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}
             >
               <Link
                 href='/docs'
-                className='inline-flex items-center rounded-lg bg-blue-600/90 px-8 py-3 font-medium text-white shadow-lg shadow-blue-500/20 backdrop-blur-sm transition-all duration-300 hover:translate-y-[-2px] hover:bg-blue-700 hover:shadow-blue-500/40'
+                className='group inline-flex w-full items-center justify-center rounded-lg bg-blue-600/90 px-6 py-3 font-medium text-white shadow-lg shadow-blue-500/20 backdrop-blur-sm transition-all duration-300 hover:translate-y-[-2px] hover:bg-blue-700 hover:shadow-blue-500/40 sm:w-auto sm:px-8'
               >
                 Get Started
                 <svg
@@ -121,7 +228,7 @@ export default function Home() {
                 href='https://github.com/QuasarAPI/quasarflow-api'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-flex items-center rounded-lg border border-slate-300/70 bg-white/50 px-8 py-3 font-medium text-slate-700 shadow-md backdrop-blur-sm transition-all duration-300 hover:translate-y-[-2px] hover:bg-white/80 hover:shadow-lg dark:border-slate-600/70 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:bg-slate-700/70'
+                className='inline-flex w-full items-center justify-center rounded-lg border border-slate-300/70 bg-white/50 px-6 py-3 font-medium text-slate-700 shadow-md backdrop-blur-sm transition-all duration-300 hover:translate-y-[-2px] hover:bg-white/80 hover:shadow-lg sm:w-auto sm:px-8 dark:border-slate-600/70 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:bg-slate-700/70'
               >
                 <svg
                   className='mr-2 h-4 w-4'
@@ -177,29 +284,29 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
       </section>
 
       {/* Features */}
-      <section className='relative bg-slate-50/80 py-28 backdrop-blur-sm dark:bg-slate-900/80'>
+      <section className='relative bg-slate-50/80 py-16 backdrop-blur-sm sm:py-28 dark:bg-slate-900/80'>
         <div className='pointer-events-none absolute inset-0 overflow-hidden opacity-30'>
           <div className='absolute top-1/4 left-0 h-40 w-full -rotate-1 transform bg-gradient-to-r from-blue-400/10 via-purple-500/10 to-indigo-500/10 dark:from-blue-400/20 dark:via-purple-500/20 dark:to-indigo-500/20'></div>
         </div>
         <div className='relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-          <div className='mb-16 text-center'>
-            <div className='mb-3 inline-block rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-1 text-sm font-medium text-indigo-600 dark:from-blue-500/20 dark:to-purple-500/20 dark:text-indigo-400'>
+          <div className='mb-12 text-center sm:mb-16'>
+            <div className='mb-3 inline-block rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-3 py-1 text-xs font-medium text-indigo-600 sm:px-4 sm:text-sm dark:from-blue-500/20 dark:to-purple-500/20 dark:text-indigo-400'>
               Why Choose Us
             </div>
-            <h2 className='mb-5 text-4xl font-extrabold text-slate-900 dark:text-white'>
+            <h2 className='mb-4 text-3xl font-extrabold text-slate-900 sm:mb-5 sm:text-4xl dark:text-white'>
               Why Choose QuasarFlow?
             </h2>
-            <p className='mx-auto max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300'>
+            <p className='mx-auto max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-300'>
               Enterprise-grade blockchain infrastructure that scales with your
               business, designed for developers who want simplicity
             </p>
           </div>
 
-          <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            <div className='group rounded-xl border border-slate-200/70 bg-white/70 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:translate-y-[-5px] hover:bg-white hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/60 dark:hover:bg-slate-800/90'>
-              <div className='mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg shadow-blue-500/20 dark:from-blue-600 dark:to-blue-900 dark:shadow-blue-900/30'>
+          <div className='grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3'>
+            <div className='group rounded-xl border border-slate-200/70 bg-white/70 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:translate-y-[-5px] hover:bg-white hover:shadow-xl sm:p-8 dark:border-slate-700/70 dark:bg-slate-800/60 dark:hover:bg-slate-800/90'>
+              <div className='mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg shadow-blue-500/20 sm:mb-6 sm:h-16 sm:w-16 dark:from-blue-600 dark:to-blue-900 dark:shadow-blue-900/30'>
                 <svg
-                  className='h-8 w-8 text-white'
+                  className='h-6 w-6 text-white sm:h-8 sm:w-8'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -212,10 +319,10 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
                   />
                 </svg>
               </div>
-              <h3 className='mb-3 text-xl font-bold text-slate-900 dark:text-white'>
+              <h3 className='mb-3 text-lg font-bold text-slate-900 sm:text-xl dark:text-white'>
                 Lightning Fast
               </h3>
-              <p className='leading-relaxed text-slate-600 dark:text-slate-300'>
+              <p className='text-sm leading-relaxed text-slate-600 sm:text-base dark:text-slate-300'>
                 Built on Stellar&apos;s fast, low-cost network. Transactions
                 settle in seconds, not minutes.
               </p>
@@ -672,30 +779,42 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
       </section>
 
       {/* Footer */}
-      <footer className='relative overflow-hidden bg-slate-900 py-16 text-white'>
+      <footer className='relative overflow-hidden bg-slate-900 py-12 text-white sm:py-16'>
         <div className='absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(30,64,175,0.15),transparent),radial-gradient(circle_at_70%_60%,rgba(79,70,229,0.1),transparent)]'></div>
         <div className='absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent'></div>
 
         <div className='relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-          <div className='grid gap-10 md:grid-cols-4'>
-            <div>
-              <h3 className='mb-5 text-2xl font-bold'>
-                Quasar
-                <span className='bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent'>
-                  Flow
-                </span>
-              </h3>
-              <p className='leading-relaxed text-slate-400'>
+          <div className='grid gap-8 sm:gap-10 md:grid-cols-4'>
+            <div className='md:col-span-1'>
+              <div className='mb-4 flex flex-col items-center sm:mb-5 sm:flex-row'>
+                <img
+                  src='/img/logo_without_blue.png'
+                  alt='QuasarFlow'
+                  className='mb-2 h-6 w-auto sm:mr-3 sm:mb-0 sm:h-8 dark:hidden'
+                />
+                <img
+                  src='/img/logo_without_blue.png'
+                  alt='QuasarFlow'
+                  className='mb-2 hidden h-6 w-auto sm:mr-3 sm:mb-0 sm:h-8 dark:block'
+                />
+                <h3 className='text-xl font-bold sm:text-2xl'>
+                  Quasar
+                  <span className='bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent'>
+                    Flow
+                  </span>
+                </h3>
+              </div>
+              <p className='text-center text-sm leading-relaxed text-slate-400 sm:text-left sm:text-base'>
                 Making blockchain development simple and accessible for
                 everyone.
               </p>
             </div>
 
-            <div>
-              <h4 className='mb-5 text-lg font-bold text-white/90'>
+            <div className='text-center sm:text-left'>
+              <h4 className='mb-3 text-base font-bold text-white/90 sm:mb-5 sm:text-lg'>
                 Documentation
               </h4>
-              <ul className='space-y-3 text-slate-400'>
+              <ul className='space-y-2 text-sm text-slate-400 sm:space-y-3 sm:text-base'>
                 <li>
                   <Link
                     href='/docs'
@@ -723,11 +842,11 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
               </ul>
             </div>
 
-            <div>
-              <h4 className='mb-5 text-lg font-bold text-white/90'>
+            <div className='text-center sm:text-left'>
+              <h4 className='mb-3 text-base font-bold text-white/90 sm:mb-5 sm:text-lg'>
                 Resources
               </h4>
-              <ul className='space-y-3 text-slate-400'>
+              <ul className='space-y-2 text-sm text-slate-400 sm:space-y-3 sm:text-base'>
                 <li>
                   <a
                     href='https://github.com/QuasarAPI/quasarflow-api'
@@ -755,9 +874,11 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
               </ul>
             </div>
 
-            <div>
-              <h4 className='mb-5 text-lg font-bold text-white/90'>Legal</h4>
-              <ul className='space-y-3 text-slate-400'>
+            <div className='text-center sm:text-left'>
+              <h4 className='mb-3 text-base font-bold text-white/90 sm:mb-5 sm:text-lg'>
+                Legal
+              </h4>
+              <ul className='space-y-2 text-sm text-slate-400 sm:space-y-3 sm:text-base'>
                 <li>
                   <Link
                     href='/privacy'
@@ -780,7 +901,7 @@ curl -X POST https://quasarflow.dev/api/v1/wallets/{id}/payment \\
 
           <div className='mt-12 border-t border-slate-800/80 pt-8 text-center text-slate-500'>
             <p className='text-sm'>
-              &copy; 2024 QuasarFlow. All rights reserved.
+              &copy; 2025 QuasarFlow. All rights reserved.
             </p>
           </div>
         </div>
